@@ -7,17 +7,17 @@ while line: #Parse all lines one at a time
     line = line.strip()
     opponentChoice, myChoice = line.split(" ")
     if myChoice == "X":
-        myChoice = "Z" if (opponentChoice == "A") else chr(ord(opponentChoice) + 22)
+        myChoice = "C" if (opponentChoice == "A") else chr(ord(opponentChoice) -1)
     elif myChoice == "Y":
-        myChoice = chr(ord(opponentChoice)+23)
+        myChoice = chr(ord(opponentChoice))
     else:
-        myChoice = "X" if (opponentChoice == "C") else chr(ord(opponentChoice) + 24)
+        myChoice = "A" if (opponentChoice == "C") else chr(ord(opponentChoice) + 1)
 
-    myChoice = chr(ord(myChoice)-23) # Offset XYZ so they are ABC
-    if opponentChoice == myChoice:
+    charDif = ord(myChoice) - ord(opponentChoice)
+    if charDif == 0:
         myScore += 3
         opponentScore += 3
-    elif (ord(myChoice) - ord(opponentChoice) == 1 or ord(myChoice) - ord(opponentChoice) == -2): #win
+    elif (charDif == 1 or charDif == -2): # Win conditions
         myScore += 6
     else:
         opponentScore +=  6
